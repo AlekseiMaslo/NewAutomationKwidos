@@ -3,8 +3,9 @@
     <test name="TitleTest" preserve-order="false">
         <classes>
             <class name="HomePageTest"/>
-            <class name="HWAccessTest"/>
+            <class name="HWTestForLoginTest"/>
             <class name="OfferListTest"/>
+
         </classes>
     </test>
 </suite>
