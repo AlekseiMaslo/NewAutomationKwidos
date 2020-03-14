@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 
     public class HWTestForLoginTest {
     @Test
-    void test1 () throws InterruptedException {
+    void loginSuccessTest() throws InterruptedException {
         //1. Login Success.
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -19,12 +19,15 @@ import org.testng.annotations.Test;
         driver.findElement(By.id("email")).sendKeys("alekseimaslo@gmail.com");
         driver.findElement(By.id("password")).sendKeys("Kwidos123!");
         driver.findElement(By.xpath("//*[@type='submit']")).click();
+        Thread.sleep(2000);
+        WebElement verifiedUserName = driver.findElement(By.xpath("//*[contains (text(), 'aleksei')]"));
+        Assert.assertTrue(verifiedUserName.isDisplayed());
 
         driver.quit();
     }
 
     @Test
-    void test2 () throws InterruptedException {
+    void loginWrongCredentialsTest() throws InterruptedException {
         //2. Login Wrong credentials (not existing email)
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -32,18 +35,18 @@ import org.testng.annotations.Test;
         Thread.sleep(2000);
         driver.findElement(By.xpath("//*[@class='glyphicon glyphicon-log-in']/../p")).click();
         Thread.sleep(2000);
-        driver.findElement(By.id("email")).sendKeys("alekseimaslo@gmail.com");
+        driver.findElement(By.id("email")).sendKeys("1alekseimaslo@gmail.com");
         driver.findElement(By.id("password")).sendKeys("Kwidos123!");
         driver.findElement(By.xpath("//*[@type='submit']")).click();
         Thread.sleep(2000);
         WebElement alert = driver.findElement(By.xpath("//div[@class='alert alert-danger']"));
-        Assert.assertTrue(alert.isDisplayed());
+        Assert.assertEquals(alert, "Username or password is incorrect");
 
         driver.quit();
     }
 
     @Test
-        void test3 () throws InterruptedException {
+        void emptyCredentialsTest() throws InterruptedException {
         //3. Login Empty credentials
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
@@ -56,10 +59,10 @@ import org.testng.annotations.Test;
         driver.findElement(By.id("password")).sendKeys("");
         driver.findElement(By.xpath("//*[@type='submit']")).click();
         Thread.sleep(2000);
-        WebElement emailRequired = driver.findElement(By.xpath("//div[contains(text(), 'Email is required')]"));
-        WebElement passwordRequired = driver.findElement(By.xpath("//div[contains(text(), 'Password is required')]"));
-        Assert.assertTrue(passwordRequired.isDisplayed());
-        Assert.assertTrue(emailRequired.isDisplayed());
+        WebElement emailRequired = driver.findElement(By.cssSelector("input#email + div"));
+        WebElement passwordRequired = driver.findElement(By.cssSelector("input#password + div"));
+        Assert.assertEquals(emailRequired, "Email is required");
+        Assert.assertEquals(passwordRequired, "Password is required");
 
         driver.quit();
     }
