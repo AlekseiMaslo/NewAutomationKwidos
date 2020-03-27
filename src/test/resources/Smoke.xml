@@ -1,0 +1,10 @@
+<suite name="testSmoke">
+    <test name="testSmoke">
+        <classes>
+            <class name = "LoginTests"/>
+            <methods>
+                <include name = "loginSuccessTest"/>
+            </methods>
+        </classes>
+    </test>
+</suite>

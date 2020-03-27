@@ -1,0 +1,12 @@
+<suite name = "testRegression">
+    <test name = "testRegression">
+        <classes>
+            <class name = "LoginTests">
+                <methods>
+                    <include name = "loginWrongCredentialsTest"/>
+                    <include name = "emptyCredentialsTest"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
+</suite>

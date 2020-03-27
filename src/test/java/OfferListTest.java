@@ -1,12 +1,8 @@
 
 import org.openqa.selenium.By;
-
 import org.openqa.selenium.WebElement;
-
 import org.testng.Assert;
-
 import org.testng.annotations.Test;
-
 import java.util.List;
 
 public class OfferListTest extends BaseTests{
@@ -15,7 +11,7 @@ public class OfferListTest extends BaseTests{
     public void offerListSizeTest () throws InterruptedException {
 
         driver.get("https://testkwidos.tk/offer/search");
-        driver.manage().window().maximize();
+
         Thread.sleep(2000);
 
         driver.findElement(By.xpath("//label[contains(text(),'Service Type')]/../p-multiselect")).click();
